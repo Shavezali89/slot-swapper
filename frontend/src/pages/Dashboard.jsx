@@ -1,101 +1,136 @@
 import React from "react";
-import { motion } from "framer-motion";
 
-export default function Dashboard({ user, token, onLogout }) {
+export default function Dashboard({ onLogout }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-sky-500 to-cyan-400 text-gray-800 font-poppins">
-      {/* Navbar */}
-      <motion.header
-        className="flex justify-between items-center px-8 py-4 bg-white/10 backdrop-blur-lg shadow-md sticky top-0"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h1 className="text-3xl font-bold text-white">
-          Slot<span className="text-yellow-300">Swapper</span>
+    <div style={styles.container}>
+      {/* Header */}
+      <div style={styles.navbar}>
+        <h1 style={styles.logo}>
+          Slot<span style={{ color: "#00c6ff" }}>Swapper</span>
         </h1>
-        <button
-          onClick={onLogout}
-          className="bg-white text-indigo-600 font-semibold px-5 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-md"
-        >
+        <button style={styles.logoutBtn} onClick={onLogout}>
           Logout
         </button>
-      </motion.header>
+      </div>
 
-      {/* Main Grid */}
-      <div className="grid md:grid-cols-2 gap-8 p-8">
-        {/* My Events */}
-        <motion.section
-          className="bg-white/90 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="text-2xl font-semibold text-indigo-600 mb-4 flex items-center gap-2">
-            📅 My Events
-          </h2>
+      {/* Content */}
+      <div style={styles.content}>
+        {/* My Events Section */}
+        <div style={styles.card}>
+          <h2 style={styles.cardTitle}>📅 My Events</h2>
+          <input style={styles.input} placeholder="Title" />
+          <input style={styles.input} placeholder="Start Time (ISO)" />
+          <input style={styles.input} placeholder="End Time (ISO)" />
+          <button style={styles.createBtn}>Create Event</button>
+        </div>
 
-          <div className="flex flex-col gap-3">
-            <input
-              placeholder="Title"
-              className="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <input
-              placeholder="Start Time (ISO)"
-              className="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <input
-              placeholder="End Time (ISO)"
-              className="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 outline-none"
-            />
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-indigo-500 to-cyan-400 text-white font-semibold py-2 rounded-lg mt-2 shadow-md hover:shadow-lg transition"
-            >
-              Create Event
-            </motion.button>
+        {/* Marketplace Section */}
+        <div style={styles.card}>
+          <h2 style={styles.cardTitle}>🌐 Marketplace</h2>
+          <div style={styles.marketBox}>
+            <p>Incoming Requests</p>
+            <div style={styles.divider}></div>
+            <p>Outgoing Requests</p>
           </div>
-
-          {!token && (
-            <p className="text-red-600 text-sm text-center mt-3">
-              ⚠ No Token (Login Again)
-            </p>
-          )}
-        </motion.section>
-
-        {/* Marketplace */}
-        <motion.section
-          className="bg-white/90 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-        >
-          <h2 className="text-2xl font-semibold text-indigo-600 mb-4 flex items-center gap-2">
-            🌐 Marketplace
-          </h2>
-
-          <div className="bg-white rounded-xl p-4 shadow-inner space-y-3">
-            <div className="p-3 border border-gray-200 rounded-md hover:bg-gray-50 transition">
-              <p className="font-medium">Incoming Requests</p>
-            </div>
-            <div className="p-3 border border-gray-200 rounded-md hover:bg-gray-50 transition">
-              <p className="font-medium">Outgoing Requests</p>
-            </div>
-          </div>
-
-          {!token && (
-            <p className="text-red-600 text-sm text-center mt-3">
-              ⚠ No Token (Login Again)
-            </p>
-          )}
-        </motion.section>
+        </div>
       </div>
 
       {/* Footer */}
-      <footer className="text-center text-white/70 py-4 text-sm">
-        © {new Date().getFullYear()} SlotSwapper — Made with ❤ by Vaisnavi
+      <footer style={styles.footer}>
+        © {new Date().getFullYear()} SlotSwapper. All rights reserved.
       </footer>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #667eea 0%, #00c6ff 100%)",
+    fontFamily: "Poppins, sans-serif",
+    color: "#333",
+    display: "flex",
+    flexDirection: "column",
+  },
+  navbar: {
+    background: "rgba(255,255,255,0.15)",
+    backdropFilter: "blur(8px)",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "18px 40px",
+    color: "white",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+  },
+  logo: {
+    fontSize: "28px",
+    fontWeight: "bold",
+    letterSpacing: "1px",
+  },
+  logoutBtn: {
+    background: "white",
+    color: "#00c6ff",
+    fontWeight: "600",
+    border: "none",
+    padding: "8px 18px",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "0.3s",
+  },
+  content: {
+    flex: 1,
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "40px",
+    padding: "40px 60px",
+  },
+  card: {
+    background: "rgba(255,255,255,0.9)",
+    borderRadius: "16px",
+    padding: "30px",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+  },
+  cardTitle: {
+    fontSize: "22px",
+    color: "#004aad",
+    fontWeight: "600",
+    marginBottom: "20px",
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    marginBottom: "12px",
+    fontSize: "14px",
+    outline: "none",
+  },
+  createBtn: {
+    width: "100%",
+    padding: "10px",
+    background: "#00c6ff",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontWeight: "600",
+  },
+  marketBox: {
+    background: "#fff",
+    borderRadius: "10px",
+    padding: "20px",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+  },
+  divider: {
+    height: "1px",
+    background: "#eee",
+    margin: "10px 0",
+  },
+  footer: {
+    textAlign: "center",
+    padding: "12px",
+    fontSize: "13px",
+    color: "#fff",
+    background: "rgba(255,255,255,0.1)",
+  },
+};
