@@ -94,7 +94,7 @@ export default function Dashboard({ user, token, onLogout }) {
 
       {/* Footer */}
       <footer className="text-center text-white/70 py-4 text-sm">
-        © {new Date().getFullYear()} SlotSwapper — Made with ❤ by Shavez
+        © {new Date().getFullYear()} SlotSwapper — Made with ❤ by Vaisnavi
       </footer>
     </div>
   );
